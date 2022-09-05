@@ -1,12 +1,23 @@
 import React, { useEffect } from 'react';
-// @ts-ignore
-import Worker2 from '../../public/hello.worker';
 
 const TestWorker = () => {
   useEffect(() => {
-    const worker = new Worker('./worker.js');
-    console.log('chile =======>', worker);
-    console.log('chile =======22=>', new Worker(Worker2));
+    const worker = new Worker('./js/worker.message.js');
+    console.log('chile ===>', worker);
+    // worker.onerror = () => {
+    //   console.error('chile worker error');
+    // };
+    // worker.onmessageerror = () => {
+    //   console.log('chile worker message error');
+    // };
+    // worker.onmessage = (e) => {
+    //   console.log(e.data);
+    // };
+    // worker.postMessage('m1');
+    // console.log('chile ==== 11 =>', worker);
+    // worker.postMessage('m2');
+    // worker.postMessage('m3');
+    // worker.postMessage('m4');
   }, []);
 
   return (

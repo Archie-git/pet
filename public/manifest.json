@@ -1,0 +1,34 @@
+{
+  "name": "CHAT工程",
+  "short_name": "CHAT",
+  "display": "standalone",
+  "start_url": "main",
+  "background_color": "white",
+  "icons": [
+    {
+      "type": "image/png",
+      "src": "img/icon128.png",
+      "sizes": "128x128"
+    },
+    {
+      "type": "image/png",
+      "src": "img/icon144.png",
+      "sizes": "144x144"
+    },
+    {
+      "type": "image/png",
+      "src": "img/icon192.png",
+      "sizes": "192x192"
+    },
+    {
+      "type": "image/png",
+      "src": "img/icon256.png",
+      "sizes": "256x256"
+    },
+    {
+      "type": "image/png",
+      "src": "img/icon512.png",
+      "sizes": "512x512"
+    }
+  ]
+}

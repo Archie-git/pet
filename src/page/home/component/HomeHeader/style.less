@@ -1,0 +1,48 @@
+.container {
+  height: 4rem;
+  padding: 0 10vw;
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 0 20px 10px lightgray;
+  .logo {
+    width: 8rem;
+    height: 2.5rem;
+  }
+  .link {
+    margin: 0 2rem;
+    color: gray;
+    font-size: 1.1rem;
+    text-decoration: none;
+    &:focus {
+      color: black;
+      font-weight: bold;
+    }
+  }
+  .search {
+    width: 30rem;
+    height: 2rem;
+    text-indent: 0.5rem;
+    border-radius: 5px;
+  }
+  .profile {
+    margin: 0 2rem;
+    display: flex;
+    align-items: center;
+    img {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1.5rem;
+    }
+  }
+  .create {
+    width: 4rem;
+    height: 2rem;
+    font-size: 1.1rem;
+    background-color: #fbe529;
+    border: none;
+    cursor: pointer;
+  }
+}
