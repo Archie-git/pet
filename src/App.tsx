@@ -21,8 +21,14 @@ import './App.css';
 
 const App = () => {
   useEffect(() => {
-    // initMessageWorker();
-  }, []);
+    window.onerror = (message, url, line) => {
+      console.log('chile =uncaught error=>', message, url, line);
+      return false;
+    };
+    return () => {
+      navigator.sendBeacon('/v1/collect');
+    };
+  });
   return (
     <Provider store={Store}>
       <BrowserRouter>
@@ -49,3 +55,5 @@ const App = () => {
 };
 
 export default App;
+
+// todo.archie requestAnimationFrame()
