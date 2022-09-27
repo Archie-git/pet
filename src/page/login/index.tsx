@@ -1,10 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './style.less';
 
+const secret = 'management';
+
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [record, setRecord] = useState('');
   const [pending, setPending] = useState(false);
+
+  useEffect(() => {
+    window.onkeyup = (e) => {
+      setRecord(secret.includes(e.key) ? (value) => value + e.key : '');
+    };
+    return () => {
+      window.onkeyup = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!secret.startsWith(record)) {
+      setRecord('');
+      return;
+    }
+    if (secret === record) {
+      // todo.archie 下载安装包
+      window.open('https://www.baidu.com', '_blank');
+    }
+  }, [record]);
+
   const handleLogin = () => {
     setPending(true);
     localStorage.setItem('logined', 'YES');

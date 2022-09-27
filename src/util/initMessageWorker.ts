@@ -1,10 +1,11 @@
 const initMessageWorker = () => {
-  // Notification.requestPermission().then(() => {
-  //   new Notification('Notification已授权');
-  // }).catch(() => {
-  //   console.log('chile ============= jiiijiji =>');
-  //   window.alert('需要授权');
-  // });
+  if (Notification.permission !== 'granted') {
+    Notification.requestPermission().then((permission) => {
+      if (permission !== 'granted') {
+        window.alert('Notification需要授权');
+      }
+    });
+  }
 
   // 打开进入到Home页面时，如果网络无链接，则从IndexDB获取messages构建填充
   // 关闭App或网络断开时，从redux注入到IndexDB
@@ -14,7 +15,7 @@ const initMessageWorker = () => {
   // 2. PWA React 仿即刻兴趣社区
   // 3. Electron Vue 后台管理系统
 
-  // DB初始化
+  // 通过DB初始化store
   let db;
   const request = indexedDB.open('user', 1);
   request.onupgradeneeded = (event) => {

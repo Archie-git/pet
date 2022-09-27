@@ -41,9 +41,11 @@ self.onmessage = (event) => {
   console.log('chile =message=>', event);
 };
 
-// self.onfetch = (event) => {
-//   const { request } = event;
-//   const { pathname } = new URL(request.url);
-//   const matched = CACHE_PATHS.includes(pathname) || pathname.startsWith('/js/') || /\.(png|svg)$/.test(pathname);
-//   event.respondWith(matched ? getResponseFromCache(request) : fetch(request));
-// };
+if (ENV.MODE === 'PRODUCTION') {
+  self.onfetch = (event) => {
+    const { request } = event;
+    const { pathname } = new URL(request.url);
+    const matched = CACHE_PATHS.includes(pathname) || pathname.startsWith('/js/') || /\.(png|svg)$/.test(pathname);
+    event.respondWith(matched ? getResponseFromCache(request) : fetch(request));
+  };
+}

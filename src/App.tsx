@@ -21,14 +21,19 @@ import './App.css';
 
 const App = () => {
   useEffect(() => {
+    if (!navigator.onLine) {
+      window.alert('请检查您的网络连接...');
+    }
     window.onerror = (message, url, line) => {
       console.log('chile =uncaught error=>', message, url, line);
       return false;
     };
     return () => {
-      navigator.sendBeacon('/v1/collect');
+      // todo.archie   收集用户访问信息
+      const data = { userId: 1000, time: 10000 };
+      navigator.sendBeacon('/v1/collect', JSON.stringify(data));
     };
-  });
+  }, []);
   return (
     <Provider store={Store}>
       <BrowserRouter>

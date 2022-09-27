@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ENV_FILE=.env.dev webpack serve --open",
-    "build": "ENV_FILE=.env.pro webpack",
+    "build": "ENV_FILE=.env.pro webpack && http-server ./dist -p 3000",
     "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
     "tsc": "tsc --noEmit"
   },

@@ -10,15 +10,15 @@ const BackTop = () => {
   const [arrived, setArrived] = useState(false);
 
   const handleScroll = () => {
-    if (document.documentElement.scrollTop > 1000 && !arrived) {
-      setArrived(true);
-    }
-    if (document.documentElement.scrollTop <= 1000 && arrived) {
-      setArrived(false);
-    }
-    console.log('chile ======>', document.documentElement.scrollTop);
-    // // todo.archie
-    // setArrived(false);
+    setArrived(document.documentElement.scrollTop > 1000);
+  };
+
+  const handleClick = () => {
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   };
 
   useEffect(() => {
@@ -32,7 +32,13 @@ const BackTop = () => {
   }, [location.pathname]);
 
   return (
-    <div className={style.container} style={{ display: targeted && arrived ? 'block' : 'none' }}>返回</div>
+    <div
+      className={style.container}
+      style={{ display: targeted && arrived ? 'block' : 'none' }}
+      onClick={handleClick}
+    >
+      返回
+    </div>
   );
 };
 

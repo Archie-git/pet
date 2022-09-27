@@ -3,6 +3,8 @@ declare const ENV: {
   MODE: 'DEVELOPMENT' | 'PRODUCTION',
   HOST_URL: string,
   WS_URL: string,
+  DB_NAME: string,
+  DB_VERSION: string,
 };
 
 declare module '*.css' {
