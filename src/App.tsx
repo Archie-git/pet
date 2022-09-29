@@ -18,12 +18,10 @@ import CommunityPage from './page/community';
 import NotificationPage from './page/notification';
 import NeighbourhoodPage from './page/neighbourhood';
 import './App.css';
+import TempPage from './page/temp';
 
 const App = () => {
   useEffect(() => {
-    if (!navigator.onLine) {
-      window.alert('请检查您的网络连接...');
-    }
     window.onerror = (message, url, line) => {
       console.log('chile =uncaught error=>', message, url, line);
       return false;
@@ -40,6 +38,8 @@ const App = () => {
         <Routes>
           <Route path="login" element={<LoginPage />} />
           <Route path="404" element={<ErrorPage />} />
+          {/*todo.archie remove*/}
+          <Route path="/temp" element={<TempPage />} />
           <Route path="/" element={<HomePage />}>
             <Route path="me" element={<MePage />} />
             <Route path="user" element={<UserPage />} />

@@ -1,3 +1,11 @@
+const initBothFromRemote = () => {
+  console.log('chile ===>initBothFromRemote');
+};
+
+const initStoreFromDB = () => {
+  console.log('chile ===>initStoreFromDB');
+};
+
 const initMessageWorker = () => {
   if (Notification.permission !== 'granted') {
     Notification.requestPermission().then((permission) => {
@@ -7,53 +15,25 @@ const initMessageWorker = () => {
     });
   }
 
-  // 打开进入到Home页面时，如果网络无链接，则从IndexDB获取messages构建填充
-  // 关闭App或网络断开时，从redux注入到IndexDB
-  // 查询聊天记录时，从IndexDB查询
+  window.addEventListener('online', () => {
+    console.log('chile =====online==>');
+  });
+  window.addEventListener('offline', () => {
+    window.alert('请检查您的网络连接');
+  });
 
-  // 1. Electron React 仿照微信聊天、朋友圈
-  // 2. PWA React 仿即刻兴趣社区
-  // 3. Electron Vue 后台管理系统
+  if (navigator.onLine) {
+    // 从服务器获取聊天data，用于更新redux和indexDB（考虑通过serviceWorker减少阻塞）
+    // 查询聊天记录时，从IndexDB查询
+    initBothFromRemote();
+  } else {
+    // 通过indexedDB来对store初始化
+    initStoreFromDB();
+  }
 
-  // 通过DB初始化store
-  let db;
-  const request = indexedDB.open('user', 1);
-  request.onupgradeneeded = (event) => {
-    // @ts-ignore
-    db = event.target.result;
-    if (db.objectStoreNames.contains('user')) {
-      db.deleteObjectStore('user');
-    }
-    db.createObjectStore('user', { keyPath: 'name' });
-  };
-  request.onsuccess = (event) => {
-    console.log('chile ====success=>');
-    // @ts-ignore
-    db = event.target.result;
-    const txn = db.transaction('user', 'readwrite');
-    const store = txn.objectStore('user');
-    // 添加
-    // const request2 = store.add({ name: 'dogge22', age: 11 })
-    // request2.onsuccess = (event) => {
-    //   console.log('chile successsss')
-    // }
-    // request2.onerror = (event) => {
-    //   console.log('chile errrrrrrrr')
-    // }
-    // 查询
-    // const request3 = store.get('dogge22')
-    const request3 = store.getAll();
-    console.log('chile ==== store =>', store);
-    request3.onsuccess = (e: any) => {
-      console.log('chile query success', e.target.result);
-    };
-    request3.onerror = (e: any) => {
-      console.log('chile query error', e.target.result);
-    };
-  };
-  request.onerror = () => {
-    console.log('chile ====err=>');
-  };
+  // 1. PWA React 仿即刻兴趣社区
+  // 2. PWA Vue 即刻后台管理系统
+  // 3. 有空将两者集成到Electron
 };
 
 export default initMessageWorker;
